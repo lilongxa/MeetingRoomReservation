@@ -4,7 +4,7 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{1AE8ACA6-933B-BF2A-3671-3E2EAC007D16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingRoomApi", "backend\MeetingRoomApi\MeetingRoomApi.csproj", "{01F7E6FE-3E42-2C8C-0DED-1D027B5E94D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingRoomApi", "MeetingRoomApi\MeetingRoomApi.csproj", "{E057BC09-9139-464D-AEC7-A01DDF6D8D05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,16 +12,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{01F7E6FE-3E42-2C8C-0DED-1D027B5E94D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01F7E6FE-3E42-2C8C-0DED-1D027B5E94D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01F7E6FE-3E42-2C8C-0DED-1D027B5E94D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01F7E6FE-3E42-2C8C-0DED-1D027B5E94D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E057BC09-9139-464D-AEC7-A01DDF6D8D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E057BC09-9139-464D-AEC7-A01DDF6D8D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E057BC09-9139-464D-AEC7-A01DDF6D8D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E057BC09-9139-464D-AEC7-A01DDF6D8D05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{01F7E6FE-3E42-2C8C-0DED-1D027B5E94D6} = {1AE8ACA6-933B-BF2A-3671-3E2EAC007D16}
+		{E057BC09-9139-464D-AEC7-A01DDF6D8D05} = {1AE8ACA6-933B-BF2A-3671-3E2EAC007D16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {602892D5-69C7-4EB1-8A9C-28439A4E2C2F}
