@@ -1,0 +1,52 @@
+
+services:
+  frontend:
+    image: node:16
+    container_name: frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    command: npm start
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    image: mcr.microsoft.com/dotnet/aspnet:9.0
+    container_name: backend
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5000:80"
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  db_mysql:
+    image: mysql:8.0    # 指定 MySQL 版本
+    container_name: db_mysql
+    restart: always     # 容器自动重启策略
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1qaz2wsx3edc4rfv  # 设置 root 用户的密码
+      MYSQL_DATABASE: mysql          # 创建一个初始数据库
+      MYSQL_USER: admin            # 创建一个自定义用户
+      MYSQL_PASSWORD: 1qaz2wsx3edc4rfv    # 自定义用户的密码
+    ports:
+      - "3306:3306"    # 映射本地 3306 端口到容器的 3306 端口
+   
+    volumes:
+      - mysql_data:/var/lib/mysql  # 持久化数据
+
+volumes:
+  mysql_data:
+    driver: local  # 使用本地驱动
+
+networks:
+  app-network:
+    driver: bridge
