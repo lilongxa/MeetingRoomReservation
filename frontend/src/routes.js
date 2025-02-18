@@ -1,10 +1,10 @@
 import React from "react";
-import Layout from "./components/layout/ToolpadLayout";
+import Layout from "./components/layout/Layout";
 import Login from "./pages/auth/Login";
-import Booking from "./pages/Booking";
+import Reserve from "./pages/Reserve";
 import MeetingRooms from "./pages/MeetingRooms";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Bookings from "./pages/Bookings";
+import Reservations from "./pages/Reservations";
 import Users from "./pages/Users";
 import Home from "./pages/Home";
 
@@ -19,28 +19,24 @@ const routes = [
         children: [
             {
                 index: true,
-                path: "/",
-                element: <Home />,
-            },
-            {
                 path: "/home",
                 element: <Home />,
             },
             {
-                path: "users",
+                path: "/users",
                 element: <Users />,
             },  
             {
-                path: "booking",
-                element: <Booking />,
+                path: "/reserve",
+                element: <Reserve />,
             },
             {
-                path: "meeting-rooms",
+                path: "/meeting-rooms",
                 element: <MeetingRooms />,
             },
             {
-                path: "bookings",
-                element: <Bookings />,
+                path: "/reservations",
+                element: <Reservations />,
             }
         ]
     },

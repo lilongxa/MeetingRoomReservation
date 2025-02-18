@@ -117,10 +117,10 @@ const NavBar = ({ setDrawerOpen }) => {
 
     const userOptions = [
         { label: "Home", path: "/", icon: <HomeIcon /> },
-        { label: "User", path: "/user", icon: <AccountIcon /> },
-        { label: "Bookings", path: "/booking-list", icon: <BallotIcon /> },
-        { label: "RoomBooking", path: "/booking", icon: <AddHomeIcon /> },
-        { label: "Rooms", path: "/room-list", icon: <MeetingRoomIcon /> }
+        { label: "User", path: "/users", icon: <AccountIcon /> },
+        { label: "Reserve", path: "/reserve", icon: <AddHomeIcon /> },
+        { label: "Reservations", path: "/reservations", icon: <BallotIcon /> },
+        { label: "MeetingRooms", path: "/meeting-rooms", icon: <MeetingRoomIcon /> }
     ];
 
     const settings = ['Profile', 'User', 'Dashboard', 'Logout'];

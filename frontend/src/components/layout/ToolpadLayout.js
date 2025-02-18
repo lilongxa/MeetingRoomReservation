@@ -1,20 +1,17 @@
 import * as React from 'react';
 import { extendTheme, styled } from '@mui/material/styles';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
-import GroupsIcon from '@mui/icons-material/Groups';
 import BookOnlineIcon from '@mui/icons-material/BookOnline';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PermPhoneMsgIcon from '@mui/icons-material/PermPhoneMsg';
 import HomeIcon from '@mui/icons-material/Home';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout, ThemeSwitcher } from '@toolpad/core/DashboardLayout';
-import { PageContainer } from '@toolpad/core/PageContainer';
-import Grid from '@mui/material/Grid2';
+import { Outlet } from "react-router-dom";
 
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { AppBar,Toolbar } from '@mui/material';
 
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -33,13 +30,9 @@ const NAVIGATION = [
     title: 'Home',
     icon: <HomeIcon />,
   },
-  {
-    segment: 'meeting-rooms',
-    title: 'MeetingRooms',
-    icon: <GroupsIcon />,
-    children: [
+  
       {
-        segment: 'meeting-room-management',
+        segment: 'meeting-rooms',
         title: 'MeetingRooms',
         icon: <MeetingRoomIcon />,
       },
@@ -52,8 +45,6 @@ const NAVIGATION = [
         segment: 'reservation',
         title: 'Reservations',
         icon: <BookOnlineIcon />,
-      }
-    ],
   },
   {
     segment: 'users',
@@ -95,7 +86,7 @@ DemoPageContent.propTypes = {
       },
     },
   });
-  
+
   function useDemoRouter(initialPath) {
     const [pathname, setPathname] = React.useState(initialPath);
   
@@ -180,7 +171,7 @@ DemoPageContent.propTypes = {
   
   export default function ToolpadLayout(props) {
     const { window } = props;
-  
+   
     const [session, setSession] = React.useState({
       user: {
         name: 'Bharat Kashyap',
@@ -205,11 +196,12 @@ DemoPageContent.propTypes = {
         },
       };
     }, []);
-    const router = useDemoRouter('/dashboard');
+    const router = useDemoRouter('/home');
   
     // Remove this const when copying and pasting into your project.
-    const demoWindow = window ? window() : undefined;
+    // const demoWindow = window ? window() : undefined;
   
+    console.log(router);
     return (
       <AppProvider
         navigation={NAVIGATION}
@@ -217,7 +209,7 @@ DemoPageContent.propTypes = {
         authentication={authentication}
         router={router}
         theme={demoTheme}
-        window={demoWindow}
+        // window={demoWindow}
       >
         <DashboardLayout
           slots={{
@@ -226,43 +218,9 @@ DemoPageContent.propTypes = {
             sidebarFooter: SidebarFooter,
           }}
         >
-          <PageContainer>
-            <Grid container spacing={1}>
-              <Grid size={5} />
-              <Grid size={12}>
-                <Skeleton height={14} />
-              </Grid>
-              <Grid size={12}>
-                <Skeleton height={14} />
-              </Grid>
-              <Grid size={4}>
-                <Skeleton height={100} />
-              </Grid>
-              <Grid size={8}>
-                <Skeleton height={100} />
-              </Grid>
-  
-              <Grid size={12}>
-                <Skeleton height={150} />
-              </Grid>
-              <Grid size={12}>
-                <Skeleton height={14} />
-              </Grid>
-  
-              <Grid size={3}>
-                <Skeleton height={100} />
-              </Grid>
-              <Grid size={3}>
-                <Skeleton height={100} />
-              </Grid>
-              <Grid size={3}>
-                <Skeleton height={100} />
-              </Grid>
-              <Grid size={3}>
-                <Skeleton height={100} />
-              </Grid>
-            </Grid>
-          </PageContainer>
+          <Box sx={{padding:'10px', marginLeft:'20px'}}>
+            <Outlet />
+          </Box>
         </DashboardLayout>
       </AppProvider>
     );

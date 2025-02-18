@@ -1,6 +1,6 @@
 import React from "react";
 
-const Bookings = () => {
+const Reservations = () => {
   return (
     <div>
       <h1>Booking List</h1>
@@ -8,4 +8,4 @@ const Bookings = () => {
   );
 }
 
-export default Bookings;
+export default Reservations;
