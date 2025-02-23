@@ -6,6 +6,7 @@ import MeetingRooms from "./pages/MeetingRooms";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Reservations from "./pages/Reservations";
 import Users from "./pages/Users";
+import UserTable from "./pages/UserTable";
 import Home from "./pages/Home";
 
 const routes = [
@@ -18,13 +19,12 @@ const routes = [
         ),
         children: [
             {
-                index: true,
-                path: "/home",
+                path: "/",
                 element: <Home />,
             },
             {
                 path: "/users",
-                element: <Users />,
+                element: <UserTable />,
             },  
             {
                 path: "/reserve",

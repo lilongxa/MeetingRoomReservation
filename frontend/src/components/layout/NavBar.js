@@ -85,12 +85,14 @@ const AppBar = styled(MuiAppBar, {
     ],
 }));
 
+
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme }) => ({
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
+        transition: 'transform 0.3s ease-in-out',
         variants: [
             {
                 props: ({ open }) => open,
@@ -179,7 +181,7 @@ const NavBar = ({ setDrawerOpen }) => {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap component={Link} to="/" sx={{ textDecoration: 'none', color: 'white' }}>
-                            Room Booking
+                        Meeting Room Reservation System
                         </Typography>
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
@@ -214,6 +216,7 @@ const NavBar = ({ setDrawerOpen }) => {
                 </Toolbar>
 
             </AppBar>
+            
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>

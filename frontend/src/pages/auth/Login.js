@@ -123,9 +123,9 @@ export default function Login() {
       setEmailErrorMessage('');
     }
 
-    if (!password.value || password.value.length < 6) {
+    if (!password.value || password.value.length < 5) {
       setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
+      setPasswordErrorMessage('Password must be at least 5 characters long.');
       isValid = false;
     } else {
       setPasswordError(false);
