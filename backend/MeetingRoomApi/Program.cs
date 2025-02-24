@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using MRR.Application.Interfaces;
 using MRR.Application.Services;
 using MRR.Infrastructure.Repositories;
+using MRR.WebAPI.Helpers;
 using MRR.WebAPI.Models;
 using SqlSugar;
 using System.Text;
@@ -63,18 +64,18 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<JwtHelper>();
 builder.Services.AddScoped<IMeetingRoomService, MeetingRoomService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
+    options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5089") // 允许 React 前端访问
-                  .AllowAnyMethod() // 允许所有 HTTP 方法（GET, POST, PUT, DELETE）
-                  .AllowAnyHeader()// 允许所有请求头
-                  .AllowCredentials(); // 允许携带 Cookie（如果有身份认证需求）
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod() 
+                  .AllowAnyHeader();
         });
 });
 
@@ -111,7 +112,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MeetingRoom API v1"));
 }
 
-app.UseCors("AllowAll");
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

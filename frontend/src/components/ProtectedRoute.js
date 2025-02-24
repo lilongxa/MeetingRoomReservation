@@ -4,11 +4,11 @@ import { useAuth } from "../auth/AuthContext";
 
 function ProtectedRoute({ children }) {
     const { user, isInit } = useAuth();
-    // if (isInit) {
-    //     if (!user) {
-    //         return <Navigate to="/login" />;
-    //     }
-    // }
+    if (isInit) {
+        if (!user) {
+            return <Navigate to="/login" />;
+        }
+    }
     return children;
 }
 

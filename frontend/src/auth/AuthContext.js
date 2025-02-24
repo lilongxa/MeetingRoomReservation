@@ -29,7 +29,8 @@ export function AuthProvider({ children }) {
 
     const login = async (email, password) => {
         var response = await loginService(email, password);
-        if (response.statusCode === 200) {
+        console.log(response);
+        if (response.status === 200) {
             const token = response.data.token;
             setSession(token);
             setLoginUser(token);
