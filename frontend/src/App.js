@@ -3,17 +3,8 @@ import routes from './routes';
 import { BrowserRouter as Router, Route, Routes,useRoutes } from 'react-router-dom';
 import { ConfirmProvider } from "material-ui-confirm";
 import { AuthProvider } from './auth/AuthContext';
+import { NotificationProvider } from "./components/NotificationProvider";
 
-// function App() {
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="./" element={<Login />} />
-//         <Route path="/home" element={<Home />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
 function App() {
   var content = useRoutes(routes);
 
@@ -21,7 +12,9 @@ function App() {
     <>
       <AuthProvider>
         <ConfirmProvider>
-          {content}
+          <NotificationProvider>
+              {content}
+          </NotificationProvider>
         </ConfirmProvider>
       </AuthProvider>
     </>

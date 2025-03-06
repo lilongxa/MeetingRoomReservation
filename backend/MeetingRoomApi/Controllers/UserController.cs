@@ -36,15 +36,49 @@ namespace MRR.WebAPI.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO dto)
+        public async Task<IActionResult> CreateUser([FromBody] UserDTO dto)
         {
-            var success = await _authService.CreateUserAsync(dto.Username, dto.Password, dto.Role, dto.FullName, dto.Email);
-            if (!success)
+            if (await _authService.GetUserByUsernameAsync(dto.Username) != null)
             {
                 return BadRequest(new { message = $"The user {dto.Username} already exists!" });
             }
-            return Ok(new { message = "User creation succeeded!" });
+            var user = await _authService.CreateUserAsync(dto.Username, dto.Password, dto.Role, dto.FullName, dto.Email);
+            
+            return Ok(user);
         }
+
+        [HttpPost("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserDTO dto)
+        {
+            var userEntity = await _userService.GetUserByIdAsync(dto.Id);
+            if (userEntity == null)
+            {
+                return BadRequest(new { message = $"The user {dto.Username} doesn't exist!" });
+            }
+
+            dto.Password = userEntity.PasswordHash;
+            
+            var user = new Domain.Entities.User
+            {
+                Id = dto.Id,
+                Username = dto.Username,
+                PasswordHash = dto.Password,
+                Role = dto.Role,
+                FullName = dto.FullName,
+                Email = dto.Email
+            };
+            await _userService.UpdateUserAsync(user);
+
+            return Ok(new { message = "User updating succeeded!" });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            await _userService.DeleteUserAsync(id);
+            return Ok();
+        }
+
 
         [HttpGet("paged")]
         public async Task<IActionResult> GetUsers([FromQuery] PaginationRequestDto request)

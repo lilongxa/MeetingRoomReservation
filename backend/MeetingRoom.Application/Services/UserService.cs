@@ -1,6 +1,7 @@
 ﻿using MRR.Application.DTOs;
 using MRR.Application.Interfaces;
 using MRR.Domain.Entities;
+using MRR.Infrastructure.Persistence.Entities;
 using MRR.Infrastructure.Repositories;
 using SqlSugar;
 
@@ -28,9 +29,19 @@ namespace MRR.Application.Services
             await _userRepository.AddUser(user);
         }
 
+        public async Task UpdateUserAsync(User user)
+        { 
+            await _userRepository.UpdateUser(user);
+        }
+
+        public async Task DeleteUserAsync(int id)
+        {
+            await _userRepository.DeleteUser(id);
+        }
+
         public async Task<PaginationResponseDto<User>> GetUsers(PaginationRequestDto request)
         {
-            var query = _db.Queryable<User>();
+            var query = _db.Queryable<UserEntity>();
 
             if (!string.IsNullOrEmpty(request.Search))
             {
@@ -50,7 +61,14 @@ namespace MRR.Application.Services
 
             var response = new PaginationResponseDto<User>
             {
-                Items = users,
+                Items = users.Select(u => new User
+                {
+                    Id = u.Id,
+                    Username = u.Username,
+                    Role = u.Role,
+                    FullName = u.FullName,
+                    Email = u.Email
+                }).ToList(),
                 TotalCount = totalCount,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize

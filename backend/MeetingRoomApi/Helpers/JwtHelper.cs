@@ -18,25 +18,31 @@ namespace MRR.WebAPI.Helpers
 
         public string GenerateToken(User user)
         {
+            var tokenHandler = new JwtSecurityTokenHandler();
             var claims = new[]
             {
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, user.Role),
-                new Claim("UserId", user.Id.ToString())
+                new Claim(ClaimTypes.Role, user.Role.ToString()),
+                new Claim("id", user.Id.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                NotBefore = DateTime.UtcNow,
+                Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.ExpirationInMinutes),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature),
+                Issuer = _jwtSettings.Issuer,
+                Audience = _jwtSettings.Audience
+            };
 
-            var token = new JwtSecurityToken(
-                issuer: _jwtSettings.Issuer,
-                audience: _jwtSettings.Audience,
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(_jwtSettings.ExpirationInMinutes),
-                signingCredentials: creds
-            );
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MRR.Application.Interfaces;
 using MRR.Domain.Entities;
+using MRR.Infrastructure.Persistence.Entities;
 using SqlSugar;
 using System.Security.Cryptography;
 using System.Text;
@@ -17,11 +18,14 @@ namespace MRR.Application.Services
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {
-            return await _db.Queryable<User>().FirstAsync(u => u.Username == username);
+            var entity =  await _db.Queryable<UserEntity>().FirstAsync(u => u.Username == username);
+
+            return entity == null? null:UserEntity.MapToDomain(entity);
         }
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            return await _db.Queryable<User>().FirstAsync(u => string.Equals(u.Email,email, StringComparison.OrdinalIgnoreCase));
+            var entity = await _db.Queryable<UserEntity>().FirstAsync(u => string.Equals(u.Email,email, StringComparison.OrdinalIgnoreCase));
+            return UserEntity.MapToDomain(entity);
         }
 
         public bool VerifyPassword(string password, string hashedPassword)
@@ -38,17 +42,17 @@ namespace MRR.Application.Services
             var hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
             return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
         }
-        public async Task<bool> CreateUserAsync(string username, string password, string role, string fullName, string email)
+        public async Task<User> CreateUserAsync(string username, string password, string role, string fullName, string email)
         {
-            var existingUser = await _db.Queryable<User>().FirstAsync(u => u.Username == username);
+            var existingUser = await _db.Queryable<UserEntity>().FirstAsync(u => u.Username == username);
             if (existingUser != null)
             {
-                return false; 
+                return null; 
             }
 
             var hashedPassword = HashPassword(password);
 
-            var newUser = new User
+            var newUser = new UserEntity
             {
                 Username = username,
                 PasswordHash = hashedPassword,
@@ -57,8 +61,8 @@ namespace MRR.Application.Services
                 Email = email
             };
 
-            var result = await _db.Insertable(newUser).ExecuteCommandAsync();
-            return result > 0;
+            var result = await _db.Insertable(newUser).ExecuteReturnEntityAsync();
+            return UserEntity.MapToDomain(result);
         }
     }
 }

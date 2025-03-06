@@ -3,19 +3,18 @@ import Layout from "./components/layout/Layout";
 import Login from "./pages/auth/Login";
 import Reserve from "./pages/Reserve";
 import MeetingRooms from "./pages/MeetingRooms";
-import ProtectedRoute from "./components/ProtectedRoute";
+import AuthGuard from "./components/AuthGuard";
 import Reservations from "./pages/Reservations";
-import Users from "./pages/Users";
-import UserTable from "./pages/UserTable";
+import UserList from "./pages/UserList";
 import Home from "./pages/Home";
 
 const routes = [
     {
         path: "/",
         element: (
-            <ProtectedRoute>
+            <AuthGuard>
                 <Layout />
-            </ProtectedRoute>
+            </AuthGuard>
         ),
         children: [
             {
@@ -24,7 +23,7 @@ const routes = [
             },
             {
                 path: "/users",
-                element: <UserTable />,
+                element: <UserList />,
             },  
             {
                 path: "/reserve",

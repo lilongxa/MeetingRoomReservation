@@ -97,11 +97,12 @@ export default function Login() {
         if (emailError || passwordError) {
             return;
         }
+
         const data = new FormData(event.currentTarget);
 
         try {
-            const user = await login(data.get('email'), data.get('password'));
-            if (user) {
+            const success = await login(data.get('email'), data.get('password'));
+            if (success) {
                 if (rememberMe) {
                     localStorage.setItem('rememberedEmail', data.get('email'));
                 } else {
@@ -109,10 +110,10 @@ export default function Login() {
                 }
                 navigate("/");
             }
-        }
-        catch (error) {
-            console.error(error);
-            error !== "Success" ? setError(error) : setError('');
+        } catch (error) {
+            console.error('Login error:', error);
+            const errorMessage = error?.response?.data?.message || error?.message || '登录失败，请重试';
+            setError(errorMessage);
         }
     };
 

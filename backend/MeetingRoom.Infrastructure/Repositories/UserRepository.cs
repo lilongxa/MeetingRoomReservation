@@ -42,14 +42,16 @@ namespace MRR.Infrastructure.Repositories
         }
 
 
-        private static User MapToDomain(UserEntity entity)
+        private static Domain.Entities.User MapToDomain(Persistence.Entities.UserEntity entity)
         {
             return new User
             {
                 Id = entity.Id,
                 Username = entity.Username,
                 PasswordHash = entity.PasswordHash,
-                Role = entity.Role
+                Role = entity.Role,
+                Email = entity.Email,
+                FullName = entity.FullName
             };
         }
 
@@ -60,7 +62,9 @@ namespace MRR.Infrastructure.Repositories
                 Id = user.Id,
                 Username = user.Username,
                 PasswordHash = user.PasswordHash,
-                Role = user.Role
+                Role = user.Role,
+                Email = user.Email,
+                FullName = user.FullName
             };
         }
     }

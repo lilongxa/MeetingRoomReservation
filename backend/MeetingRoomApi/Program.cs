@@ -18,7 +18,7 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 var jwtSettings =  builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 builder.Services.AddSingleton<JwtSettings>(sp => jwtSettings?? throw new InvalidOperationException("JwtSettings is not configured"));
 
-builder.Services.AddSingleton<ISqlSugarClient>(sp =>
+builder.Services.AddScoped<ISqlSugarClient>(sp =>
 {
     var db = new SqlSugarClient(new ConnectionConfig()
     {

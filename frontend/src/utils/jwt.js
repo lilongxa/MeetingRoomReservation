@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-import axios from "./axios";
+import axiosInstance from "./axios";
 
 const isValidToken = (accessToken) => {
     if (!accessToken) return false;
@@ -11,9 +11,9 @@ const isValidToken = (accessToken) => {
 
 const setSession = (accessToken) => {
     if (accessToken) {
-        axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+        axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     } else {
-        delete axios.defaults.headers.common.Authorization;
+        delete axiosInstance.defaults.headers.common.Authorization;
     }
 };
 

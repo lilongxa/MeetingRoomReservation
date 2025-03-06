@@ -13,6 +13,6 @@ namespace MRR.Application.Interfaces
         Task<User> GetUserByUsernameAsync(string username);
         bool VerifyPassword(string password, string hashedPassword);
         string HashPassword(string password);
-        Task<bool> CreateUserAsync(string username, string password, string role, string fullName, string email);
+        Task<User> CreateUserAsync(string username, string password, string role, string fullName, string email);
     }
 }

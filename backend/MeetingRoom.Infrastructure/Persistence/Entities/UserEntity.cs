@@ -27,5 +27,18 @@ namespace MRR.Infrastructure.Persistence.Entities
 
         [SugarColumn(Length = 50, IsNullable = false)]
         public string Email { get; set; }
+
+        public static Domain.Entities.User MapToDomain(Persistence.Entities.UserEntity entity)
+        {
+            return new Domain.Entities.User
+            {
+                Id = entity.Id,
+                Username = entity.Username,
+                PasswordHash = entity.PasswordHash,
+                Role = entity.Role,
+                FullName = entity.FullName,
+                Email = entity.Email
+            };
+        }
     }
 }

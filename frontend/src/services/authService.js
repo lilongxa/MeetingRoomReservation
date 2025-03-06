@@ -1,4 +1,3 @@
-
 import axiosInstance from "../utils/axios";
 
 export const login = async (email, password) => {
@@ -9,7 +8,12 @@ export const login = async (email, password) => {
     });
     return response;
   } catch (error) {
-    return error.response.data;
+    // 确保错误对象包含必要的信息
+    if (error.response?.data) {
+      error.response.data.status = error.response.status;
+      return error.response.data;
+    }
+    throw error;
   }
 }
 
@@ -18,7 +22,8 @@ export const logout = async () => {
     const response = await axiosInstance.post("/auth/logout");
     return response.data;
   } catch (error) {
-    return error.response.data;
+    console.error('Logout error:', error);
+    throw error;
   }
 }
 
@@ -30,6 +35,7 @@ export const changePassword = async (email, password) => {
     });
     return response.data;
   } catch (error) {
-    return error.response.data;
+    console.error('Change password error:', error);
+    throw error;
   }
 }

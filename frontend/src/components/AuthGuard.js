@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 
-function ProtectedRoute({ children }) {
+function AuthGuard({ children }) {
     const { user, isInit } = useAuth();
     if (isInit) {
         if (!user) {
@@ -12,4 +12,4 @@ function ProtectedRoute({ children }) {
     return children;
 }
 
-export default ProtectedRoute;
+export default AuthGuard;
