@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, CircularProgress, Alert, Pagination, Box, TextField, Typography } from "@mui/material";
 import { create, update, remove } from "../services/userService";
-import api from "../api/api";
+import api from "../api/userApi";
 import {useNotification} from "../components/NotificationProvider";
 import GlobalDialog from "../components/GlobalDialog"; // 引入全局弹窗组件
 import AddUserForm from "../components/user/AddUserForm"; // 引入新增用户表单

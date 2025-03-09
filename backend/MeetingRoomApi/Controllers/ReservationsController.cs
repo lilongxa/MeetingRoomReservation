@@ -5,7 +5,7 @@ using MRR.Domain.Entities;
 
 namespace MRR.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/reservations")]
     public class ReservationsController : ControllerBase

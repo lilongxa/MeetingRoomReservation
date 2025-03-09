@@ -22,11 +22,11 @@ const MeetingRoomListTable = ({ meetingRooms, onEditClick, onDeleteClick, onRese
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Capacity</TableCell>
-            <TableCell>Description</TableCell>
+            {/* <TableCell>Description</TableCell> */}
             <TableCell>Status</TableCell>
             <TableCell>Room Type</TableCell>
             <TableCell>Available Time Slots</TableCell>
-            <TableCell>Notes</TableCell>
+            {/* <TableCell>Notes</TableCell> */}
             <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -35,11 +35,11 @@ const MeetingRoomListTable = ({ meetingRooms, onEditClick, onDeleteClick, onRese
             <TableRow key={room.id}>
               <TableCell>{room.name}</TableCell>
               <TableCell>{room.capacity}</TableCell>
-              <TableCell>{room.description}</TableCell>
+              {/* <TableCell>{room.description}</TableCell> */}
               <TableCell>{room.status}</TableCell>
               <TableCell>{room.roomType}</TableCell>
               <TableCell>{room.availableTimeSlots}</TableCell>
-              <TableCell>{room.notes}</TableCell>
+              {/* <TableCell>{room.notes}</TableCell> */}
               <TableCell align="center">
                 <Tooltip title="Edit">
                   <IconButton onClick={() => onEditClick(room)}>
