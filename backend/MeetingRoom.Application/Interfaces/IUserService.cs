@@ -1,5 +1,5 @@
-﻿using MRR.Application.DTOs;
-using MRR.Domain.Entities;
+﻿using MRR.Domain.Entities;
+using MRR.Shared.Models;
 
 namespace MRR.Application.Interfaces
 {
@@ -9,6 +9,6 @@ namespace MRR.Application.Interfaces
         Task RegisterUserAsync(User user);
         Task UpdateUserAsync(User user);
         Task DeleteUserAsync(int id);
-        Task<PaginationResponseDto<User>> GetUsers(PaginationRequestDto request);
+        Task<PaginationResponse<User>> GetUsers(PaginationRequest request);
     }
 }

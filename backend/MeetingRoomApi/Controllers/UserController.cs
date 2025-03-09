@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MRR.Application.DTOs;
 using MRR.Application.Interfaces;
 using MRR.Domain.Entities;
+using MRR.Shared.Models;
 using SqlSugar;
 
 namespace MRR.WebAPI.Controllers
@@ -81,7 +82,7 @@ namespace MRR.WebAPI.Controllers
 
 
         [HttpGet("paged")]
-        public async Task<IActionResult> GetUsers([FromQuery] PaginationRequestDto request)
+        public async Task<IActionResult> GetUsers([FromQuery] PaginationRequest request)
         {
             var users = await _userService.GetUsers(request);
 

@@ -1,4 +1,6 @@
-﻿using MRR.Domain.Entities;
+﻿using MRR.Application.DTOs;
+using MRR.Domain.Entities;
+using MRR.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,10 @@ namespace MRR.Application.Interfaces
     {
         Task<IEnumerable<MeetingRoom>> GetMeetingRoomsAsync();
         Task<MeetingRoom> GetMeetingRoomByIdAsync(int meetingRoomId);
-        Task AddMeetingRoomAsync(MeetingRoom meetingRoom);
+        Task<MeetingRoom> GetMeetingRoomByNameAsync(string name);
+        Task<MeetingRoom> AddMeetingRoomAsync(MeetingRoomDTO dto);
         Task UpdateMeetingRoomAsync(MeetingRoom meetingRoom);
         Task DeleteMeetingRoomAsync(int meetingRoomId);
+        Task<PaginationResponse<MeetingRoom>> GetPagedMeetingRooms(PaginationRequest request);
     }
 }

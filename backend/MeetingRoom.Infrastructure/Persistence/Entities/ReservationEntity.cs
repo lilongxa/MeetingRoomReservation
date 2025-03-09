@@ -2,6 +2,7 @@
 
 namespace MRR.Infrastructure.Persistence.Entities
 {
+    [SugarTable("Reservations")]
     public class ReservationEntity
     {
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]

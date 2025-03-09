@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MeetingRoom.Domain\MRR.Domain.csproj" />
     <ProjectReference Include="..\MeetingRoom.Infrastructure\MRR.Infrastructure.csproj" />
+    <ProjectReference Include="..\MeetingRoom.Shared\MRR.Shared.csproj" />
   </ItemGroup>
 
 </Project>

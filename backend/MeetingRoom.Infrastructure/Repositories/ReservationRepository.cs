@@ -1,5 +1,6 @@
 ﻿using MRR.Domain.Entities;
 using MRR.Infrastructure.Persistence.Entities;
+using MRR.Shared.Models;
 using SqlSugar;
 
 namespace MRR.Infrastructure.Repositories
@@ -57,6 +58,36 @@ namespace MRR.Infrastructure.Repositories
             await _db.Updateable(MapToEntity(reservation)).ExecuteCommandAsync();
         }
 
+        public async Task<PaginationResponse<Reservation>> GetPagedReservations(PaginationRequest request)
+        {
+            var query = _db.Queryable<ReservationEntity>();
+
+            if (!string.IsNullOrEmpty(request.Search))
+            {
+                query = query.Where(u => u.Topic.Contains(request.Search));
+            }
+
+            if (!string.IsNullOrEmpty(request.SortField))
+            {
+                bool isDescending = request.SortOrder?.ToLower() == "desc";
+                query = isDescending ? query.OrderBy($"{request.SortField} desc") : query.OrderBy($"{request.SortField} asc");
+            }
+
+            int totalCount = await query.CountAsync();
+            var entities = await query.Skip((request.PageNumber - 1) * request.PageSize)
+                                   .Take(request.PageSize)
+                                   .ToListAsync();
+
+            var response = new PaginationResponse<Reservation>
+            {
+                Items = entities.Select(MapToDomain).ToList(),
+                TotalCount = totalCount,
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize
+            };
+
+            return response;
+        }
         private Reservation MapToDomain(ReservationEntity entity)
         {
             return new Reservation()
