@@ -8,12 +8,12 @@ namespace MRR.WebAPI.Controllers
     [Authorize]
     [ApiController]
     [Route("api/reservations")]
-    public class ReservationController : ControllerBase
+    public class ReservationsController : ControllerBase
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IReservationService _reservationService;
 
-        public ReservationController(IReservationService reservationService, ICurrentUserService currentUserService)
+        public ReservationsController(IReservationService reservationService, ICurrentUserService currentUserService)
         {
             _reservationService = reservationService;
             _currentUserService = currentUserService;

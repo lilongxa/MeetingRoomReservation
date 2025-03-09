@@ -7,14 +7,14 @@ using MRR.Shared.Models;
 
 namespace MRR.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/meetingrooms")]
-    public class MeetingRoomController : ControllerBase
+    public class MeetingRoomsController : ControllerBase
     {
         private readonly IMeetingRoomService _meetingRoomService;
 
-        public MeetingRoomController(MeetingRoomService meetingRoomService)
+        public MeetingRoomsController(MeetingRoomService meetingRoomService)
         {
             _meetingRoomService = meetingRoomService;
         }
