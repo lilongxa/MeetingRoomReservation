@@ -10,7 +10,7 @@ namespace MRR.Application.DTOs
 {
     public class PaginationRequestDto
     {
-        [JsonProperty("page")]
+        [JsonProperty("pageNumber")]
         public int PageNumber { get; set; } = 1; // 默认第一页
         [JsonProperty("pageSize")]
         public int PageSize { get; set; } = 10;  // 默认每页 10 条

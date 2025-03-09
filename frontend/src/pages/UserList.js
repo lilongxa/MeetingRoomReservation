@@ -36,7 +36,7 @@ const UserList = () => {
       try {
         setLoading(true); // 开始加载
         const response = await api.get("/users/paged", {
-          params: { page:page, pageSize, search } // 传递分页参数
+          params: { pageNumber:page, pageSize, search } // 传递分页参数
         });
         const items = response.data.items || [];
         const formattedItems = items.map(item => ({
@@ -137,9 +137,8 @@ const UserList = () => {
   // 处理每页条数变化
   const handlePageSizeChange = (event) => {
     // setPageSize(event.target.value); // 更新每页条数
-    // setPage(1); // 每次更改每页条数时从第一页开始
+    setPage(1); // 每次更改每页条数时从第一页开始
     setPageSize(parseInt(event.target.value, 10));
-    setPage(0); // 当改变每页显示数量时，重置到第一页
     setRefresh(prev => prev + 1); // 添加刷新触发
   };
 
