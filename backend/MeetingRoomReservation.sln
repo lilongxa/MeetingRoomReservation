@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRR.Infrastructure", "Meeti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRR.Shared", "MeetingRoom.Shared\MRR.Shared.csproj", "{7A7897CE-A1BC-4578-BBA6-E204A9ED3C54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRR.Tests", "MRR.Tests\MRR.Tests.csproj", "{F63139EB-1FA7-464F-91D3-8BD112D35AAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{7A7897CE-A1BC-4578-BBA6-E204A9ED3C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A7897CE-A1BC-4578-BBA6-E204A9ED3C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A7897CE-A1BC-4578-BBA6-E204A9ED3C54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63139EB-1FA7-464F-91D3-8BD112D35AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63139EB-1FA7-464F-91D3-8BD112D35AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63139EB-1FA7-464F-91D3-8BD112D35AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63139EB-1FA7-464F-91D3-8BD112D35AAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

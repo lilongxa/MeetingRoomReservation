@@ -12,11 +12,13 @@ namespace MRR.Application.Services
     {
         private readonly ISqlSugarClient _db;
         private readonly IUserRepository _userRepository;
+        private readonly IPasswordHasher _passwordHasher;
 
-        public UserService(IUserRepository userRepository, ISqlSugarClient db)
+        public UserService(IUserRepository userRepository, ISqlSugarClient db, IPasswordHasher passwordHasher)
         {
             _db = db;
             _userRepository = userRepository;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<User> GetUserByIdAsync(int id)
@@ -31,7 +33,7 @@ namespace MRR.Application.Services
         }
 
         public async Task UpdateUserAsync(User user)
-        { 
+        {
             await _userRepository.UpdateUser(user);
         }
 
@@ -40,14 +42,33 @@ namespace MRR.Application.Services
             await _userRepository.DeleteUser(id);
         }
 
+        public async Task<User> CreateAsync(string username, string password, string role, string fullName, string email)
+        {
+            var existingUser = await _db.Queryable<UserEntity>().FirstAsync(u => u.Username == username);
+            if (existingUser != null)
+            {
+                return null;
+            }
+
+            var hashedPassword = _passwordHasher.Hash(password);
+
+            var newUser = new UserEntity
+            {
+                Username = username,
+                PasswordHash = hashedPassword,
+                Role = role,
+                FullName = fullName,
+                Email = email
+            };
+
+            var result = await _db.Insertable(newUser).ExecuteReturnEntityAsync();
+            return UserEntity.MapToDomain(result);
+        }
+
         public async Task<PaginationResponse<User>> GetUsers(PaginationRequest request)
         {
             var query = _db.Queryable<UserEntity>();
-
-            if (!string.IsNullOrEmpty(request.Search))
-            {
-                query = query.Where(u => u.Username.Contains(request.Search));
-            }
+            query = query.WhereIF(!string.IsNullOrEmpty(request.Search), u => u.Username.Contains(request.Search));
 
             if (!string.IsNullOrEmpty(request.SortField))
             {

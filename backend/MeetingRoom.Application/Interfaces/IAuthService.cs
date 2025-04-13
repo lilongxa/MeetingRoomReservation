@@ -11,8 +11,5 @@ namespace MRR.Application.Interfaces
     {
         Task<User> GetUserByEmailAsync(string email);
         Task<User> GetUserByUsernameAsync(string username);
-        bool VerifyPassword(string password, string hashedPassword);
-        string HashPassword(string password);
-        Task<User> CreateUserAsync(string username, string password, string role, string fullName, string email);
     }
 }
