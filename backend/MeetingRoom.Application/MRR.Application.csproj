@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MeetingRoom.Domain\MRR.Domain.csproj" />
+    <ProjectReference Include="..\MeetingRoom.Infrastructure\MRR.Infrastructure.csproj" />
+    <ProjectReference Include="..\MeetingRoom.Shared\MRR.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

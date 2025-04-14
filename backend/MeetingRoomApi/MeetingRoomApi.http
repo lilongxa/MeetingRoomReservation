@@ -1,0 +1,6 @@
+@MeetingRoomApi_HostAddress = http://localhost:5089
+
+GET {{MeetingRoomApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
