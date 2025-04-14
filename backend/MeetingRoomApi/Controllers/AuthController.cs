@@ -11,12 +11,14 @@ namespace MRR.WebAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IPasswordHasher _passwordHasher;
         private readonly JwtHelper _jwtHelper;
 
-        public AuthController(JwtHelper jwtHelper, IAuthService authService)
+        public AuthController(JwtHelper jwtHelper, IAuthService authService, IPasswordHasher passwordHasher)
         {
             _jwtHelper = jwtHelper;
             _authService = authService;
+            _passwordHasher = passwordHasher;
         }
 
         [HttpPost("login")]
@@ -32,7 +34,7 @@ namespace MRR.WebAPI.Controllers
             }
             
             var user = await _authService.GetUserByEmailAsync(loginDTO.Email);
-            if (user == null || !_authService.VerifyPassword(loginDTO.Password, user.PasswordHash))
+            if (user == null || !_passwordHasher.Verify(loginDTO.Password, user.PasswordHash))
             {
                 return Unauthorized("Invalid credentials");
             }

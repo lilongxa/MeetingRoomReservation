@@ -15,18 +15,8 @@ namespace MRR.Application.Services
 
         public async Task<IEnumerable<Reservation>> GetUserReservations(int userId)
         {
-            var entity = await _reservationRepository.GetUserReservationsAsync(userId);
-            return entity.Select(e => new Reservation()
-            {
-                Id = e.Id,
-                UserId = e.UserId,
-                MeetingRoomId = e.MeetingRoomId,
-                StartTime = e.StartTime,
-                EndTime = e.EndTime,
-                Topic = e.Topic,
-                Attendees = e.Attendees,
-                Status = e.Status
-            });
+            var userReservations = await _reservationRepository.GetUserReservationsAsync(userId);
+            return userReservations;
         }
 
         public async Task<Reservation> MakeReservation(Reservation reservation)

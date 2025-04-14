@@ -9,6 +9,7 @@ namespace MRR.Application.Interfaces
         Task RegisterUserAsync(User user);
         Task UpdateUserAsync(User user);
         Task DeleteUserAsync(int id);
+        Task<User> CreateAsync(string username, string password, string role, string fullName, string email);
         Task<PaginationResponse<User>> GetUsers(PaginationRequest request);
     }
 }

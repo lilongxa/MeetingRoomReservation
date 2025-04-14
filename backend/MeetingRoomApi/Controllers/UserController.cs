@@ -43,7 +43,7 @@ namespace MRR.WebAPI.Controllers
             {
                 return BadRequest(new { message = $"The user {dto.Username} already exists!" });
             }
-            var user = await _authService.CreateUserAsync(dto.Username, dto.Password, dto.Role, dto.FullName, dto.Email);
+            var user = await _userService.CreateAsync(dto.Username, dto.Password, dto.Role, dto.FullName, dto.Email);
             
             return Ok(user);
         }

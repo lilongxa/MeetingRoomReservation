@@ -26,8 +26,8 @@ namespace MRR.Infrastructure.Repositories
         {
             return await _db.Queryable<ReservationEntity>()
                 .Where(r => r.MeetingRoomId == reservation.MeetingRoomId &&
-                            r.StartTime < reservation.EndTime &&
-                            reservation.StartTime < r.EndTime)
+                            r.StartTime < reservation.TimeSlot.End &&
+                            reservation.TimeSlot.Start < r.EndTime)
                 .AnyAsync();
         }
 
@@ -95,8 +95,7 @@ namespace MRR.Infrastructure.Repositories
                 Id = entity.Id,
                 UserId = entity.UserId,
                 MeetingRoomId = entity.MeetingRoomId,
-                StartTime = entity.StartTime,
-                EndTime = entity.EndTime,
+                TimeSlot = new Domain.ValueObjects.TimeSlot(entity.StartTime, entity.EndTime),
                 Topic = entity.Topic,
                 Attendees = entity.Attendees,
                 Status = entity.Status
@@ -110,8 +109,8 @@ namespace MRR.Infrastructure.Repositories
                 Id = reservation.Id,
                 UserId = reservation.UserId,
                 MeetingRoomId = reservation.MeetingRoomId,
-                StartTime = reservation.StartTime,
-                EndTime = reservation.EndTime,
+                StartTime = reservation.TimeSlot.Start,
+                EndTime = reservation.TimeSlot.End,
                 Topic = reservation.Topic,
                 Attendees = reservation.Attendees,
                 Status = reservation.Status
